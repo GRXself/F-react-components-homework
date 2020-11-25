@@ -36,7 +36,25 @@ class Chat extends Component {
       this.setState({
         messages,
       });
+      this.robotInput(text);
     });
+  };
+
+  robotInput = (customerInput) => {
+    let text;
+    answersData.forEach((answer) => {
+      if (answer.tags.some((tag) => customerInput.includes(tag))) text = answer.text;
+    });
+
+    if (text) {
+      const robotMessage = { role: ROLE.ROBOT, text };
+      const messages = this.state.messages.concat(robotMessage);
+      setTimeout(() => {
+        this.setState({
+          messages,
+        });
+      });
+    }
   };
 
   render() {
