@@ -24,10 +24,19 @@ class ChatInput extends Component {
     });
   };
 
+  handleEnter = (event) => {
+    if (event.key === 'Enter') this.handleClick();
+  };
+
   render() {
     return (
       <footer className="ChatInput">
-        <input type="text" value={this.state.userInput} onChange={this.handleInputChange} />
+        <input
+          type="text"
+          value={this.state.userInput}
+          onChange={this.handleInputChange}
+          onKeyDown={this.handleEnter}
+        />
         <button type="button" onClick={this.handleClick}>
           Send
         </button>
